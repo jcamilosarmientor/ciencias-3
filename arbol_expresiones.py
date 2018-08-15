@@ -23,11 +23,11 @@ def evaluar(arbol):
         return evaluar(arbol.izq) * evaluar(arbol.der)
     return int(arbol.valor)
     
-exp = raw_input("ingrese l expresion en posfija: ").split(" ")
+# exp = raw_input("ingrese l expresion en posfija: ").split(" ")
 
-pila = Pila()
+# pila = Pila()
 
-convertir(exp, pila)
+# convertir(exp, pila)
 
-print evaluar(pila.desapilar())
+# print evaluar(pila.desapilar())
 
