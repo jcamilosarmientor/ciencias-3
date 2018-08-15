@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-from arbol_expresiones import *
+from arbol_expresiones import convertir, evaluar
 from pila import *
 
-EXPRESIONS_FILE = "expresions_file"
-RESULT_FILE = "expresions_result"
+EXPRESIONS_FILE = "expresiones.in"
+RESULT_FILE = "expresiones.out"
 
 pila = Pila()
 
@@ -26,9 +26,7 @@ def writeFile(result):
     file.close()
 
 def clearFile(file):
-    file = open(file, "w")
-    file.write("")
-    file.close()
+    file = open(file, "w").close()
 
 def run():
     readFile()
