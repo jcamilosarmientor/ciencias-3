@@ -24,7 +24,8 @@ def evaluar(arbol, variables):
     if arbol.valor == "*":
         return evaluar(arbol.izq, variables) * evaluar(arbol.der, variables)
     if arbol.valor == "=":
-        return "{} = {}".format(arbol.der.valor, evaluar(arbol.izq, variables))
+        return { arbol.der.valor: evaluar(arbol.izq, variables) }
+        # return "{} = {}".format(arbol.der.valor, evaluar(arbol.izq, variables))
     
     return int(arbol.valor)
     

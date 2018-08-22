@@ -11,14 +11,17 @@ def readFile():
     file = open(EXPRESIONS_FILE, "r")
     filas = (file.read().splitlines())
     clearFile(RESULT_FILE)
-    print("Expresiones: ")
     for exp in filas:
         convertir(exp.split(" "), pila)
         result = evaluar(pila.desapilar(), variables)
         
-        if str(result).isdigit() == False:
-            variables[result[0]] = int(result[4:])
-        writeFile(str(result)+"\n")
+        if type(result) is dict:
+            variables.update(result)
+            for key, value in result.iteritems():
+                writeFile(key+" = "+str(value)+"\n")
+        else:
+            writeFile(str(result)+"\n")
+
     print("variables: {}".format(variables))
     file.close()
 
