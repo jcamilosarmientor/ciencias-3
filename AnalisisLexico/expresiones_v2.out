@@ -1,0 +1,6 @@
+["'x' -> Illegal character ", 'EQU -> EQUALS', '3 -> NUMBER', 'SUM -> PLUS', '4 -> NUMBER']
+["'y' -> Illegal character ", 'EQU -> EQUALS', 'RES -> MINUS', '3 -> NUMBER']
+["'y' -> Illegal character ", 'EQU -> EQUALS', '3 -> NUMBER', 'SUM -> PLUS', '4 -> NUMBER', 'MUL -> TIMES', '5 -> NUMBER']
+["'z' -> Illegal character ", 'EQU -> EQUALS', '5 -> NUMBER', 'DIV -> DIVIDE', '25 -> NUMBER', 'RES -> MINUS', '3 -> NUMBER', 'MUL -> TIMES', '4 -> NUMBER']
+["'z' -> Illegal character ", 'EQU -> EQUALS', "'(' -> Illegal character ", '3 -> NUMBER', 'MUL -> TIMES', '4 -> NUMBER', "')' -> Illegal character ", 'RES -> MINUS', '2 -> NUMBER']
+["'z' -> Illegal character ", 'EQU -> EQUALS', "'(' -> Illegal character ", '3 -> NUMBER', 'RES -> MINUS', '3 -> NUMBER', "')' -> Illegal character ", 'DIV -> DIVIDE', '0 -> NUMBER']

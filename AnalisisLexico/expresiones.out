@@ -1,0 +1,8 @@
+['x -> NAME', '= -> EQUALS', '3 -> NUMBER', '- -> MINUS', '4 -> NUMBER', '+ -> PLUS', '5 -> NUMBER', '* -> TIMES', '6 -> NUMBER']
+['y -> NAME', '+ -> PLUS', '= -> EQUALS', '2 -> NUMBER']
+['y -> NAME', '= -> EQUALS', '3 -> NUMBER']
+['y -> NAME', '= -> EQUALS', '5 -> NUMBER', '/ -> DIVIDE', '8 -> NUMBER', '+ -> PLUS', '3 -> NUMBER', '- -> MINUS', '4 -> NUMBER', '* -> TIMES', '8 -> NUMBER', '+ -> PLUS', 'l -> NAME']
+['y -> NAME', '= -> EQUALS', "'(' -> Illegal character ", '5 -> NUMBER', '+ -> PLUS', '4 -> NUMBER', "')' -> Illegal character ", '* -> TIMES', '2 -> NUMBER']
+['y -> NAME', '= -> EQUALS', 'x -> NAME', '+ -> PLUS', '3 -> NUMBER']
+['y -> NAME', '= -> EQUALS']
+['y -> NAME', '= -> EQUALS', '78998798754213212356487486421321654123136453554611232 -> NUMBER', '+ -> PLUS', '2 -> NUMBER']
