@@ -11,7 +11,7 @@ def readFile():
         result = lexer_v2.t_okens(exp)
         writeFile(result)
         lexer_v2.lista = []
-        print(exp)
+        #print(exp)
 
     file.close()
 
