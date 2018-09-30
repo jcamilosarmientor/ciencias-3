@@ -19,8 +19,28 @@ expresion = (
     'EXPVACIA',
 )
 
+fbooleana=(
+     'frontIsClear',
+     'frontIsBlocked',
+     'leftIsClear',
+     'leftIsBlocked',
+     'rightIsClear',
+     'rightIsBlocked',
+     'nextToABeeper',
+     'notNextToABeeper',
+     'anyBeepersInBeeperBag',
+     'noBeepersInBeeperBag',
+     'facingNorth',
+     'facingSouth',
+     'facingEast',
+     'facingWest',
+     'notFacingNorth',
+     'notFacingSouth',
+     'notFacingEast',
+     'notFacingWest',
+)
 
-tokens =declaracion+expresion+('IDENTIFICADOR','TIPO','DECIMAL','ARGVACIO','TERMINO','CLAUSULAY','CLAUSULANO','ATOMICA','EQUALS','SEPARADOR','GIRIZQ','BLOQUE')
+tokens =declaracion+expresion+fbooleana+('IDENTIFICADOR','TIPO','DECIMAL','ARGVACIO','TERMINO','CLAUSULAY','CLAUSULANO','ATOMICA','EQUALS','SEPARADOR','BLOQUEABIERTO','BLOQUECERRADO')
 
 t_ignore = ' \t'
 t_ARGVACIO = r'\(\)'
@@ -29,7 +49,8 @@ t_CLAUSULAY = r'&&'
 t_CLAUSULANO = r'!'
 t_TIPO=r'define' or r'void'
 t_EQUALS = r'='
-t_BLOQUE =r'\{'
+t_BLOQUEABIERTO =r'\{'
+t_BLOQUECERRADO =r'\}'
 t_IDENTIFICADOR = r'[a-zA-Z_][a-zA-Z0-9_]*'
 
 lista = []
