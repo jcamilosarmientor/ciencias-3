@@ -40,9 +40,12 @@ fbooleana=(
      'notFacingWest',
 )
 
-tokens =declaracion+expresion+fbooleana+('IDENTIFICADOR','TIPO','DECIMAL','ARGVACIO','TERMINO','CLAUSULAY','CLAUSULANO','ATOMICA','EQUALS','SEPARADOR','BLOQUEABIERTO','BLOQUECERRADO')
+tokens =declaracion+expresion+fbooleana+('STARTARG','ENDARG','IDENTIFICADOR','TIPO','DECIMAL','ARGVACIO','TERMINO','CLAUSULAY','CLAUSULANO','ATOMICA','EQUALS','SEPARADOR','BLOQUEABIERTO','BLOQUECERRADO')
 
+#t_if = r'if\('
 t_ignore = ' \t'
+t_STARTARG = r'\('
+t_ENDARG = r'\)'
 t_ARGVACIO = r'\(\)'
 t_TERMINO=r'\|\|'
 t_CLAUSULAY = r'&&'
@@ -85,11 +88,7 @@ def t_TURNOFF (t):
 
 def t_TURNLEFT (t):
     r'turnleft'
-    return t
-
-def t_TURNLEFT (t):
-    r'turnleft'
-    return t
+    return t 
 
 def t_MOVE (t):
     r'move'
