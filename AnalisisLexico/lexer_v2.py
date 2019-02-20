@@ -2,16 +2,17 @@ import ply.lex as lex
 
 tokens = [ 'NAME','NUMBER','PLUS','MINUS','TIMES','DIVIDE', 'EQUALS', 'LPAREN', 'RPAREN' ]
 
-t_ignore = ' \t'
-t_PLUS = r'\PLUS'
-t_MINUS = r'\MIN'
-t_TIMES = r'\TIM'
+t_ignore = r' \t'
+t_PLUS = r'\SUM'
+t_MINUS = r'\RES'
+t_TIMES = r'\MUL'
 t_DIVIDE = r'\DIV'
 t_EQUALS = r'\EQU'
 t_LPAREN  = r'\('
 t_RPAREN  = r'\)'
-# t_NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
-t_NAME = r'^(!?(SUM)).'
+t_NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
+
+reserverdWords = ["SUM", "RES", "MUL", "DIV", "EQU"]
 
 lista = []
 
@@ -37,6 +38,7 @@ def t_okens(expresion):
         if not tok: break
         if str(tok.value) in reserverd_words:
             tok.type = tok.value
+            print(tok.value)
         lista.append(str(tok.value) + " -> " + str(tok.type))
     return lista
 

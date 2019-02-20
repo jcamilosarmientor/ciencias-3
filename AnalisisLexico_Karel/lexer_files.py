@@ -1,17 +1,18 @@
-import lexer_v2
+import lexer
 
-EXPRESIONS_FILE = "expresiones_v2.in"
-RESULT_FILE = "expresiones_v2.out"
+EXPRESIONS_FILE = "expresiones.in"
+RESULT_FILE = "expresiones.out"
 
 def readFile():
     file = open(EXPRESIONS_FILE, "r")
     filas = (file.read().splitlines())
     clearFile(RESULT_FILE)
     for exp in filas:
-        result = lexer_v2.t_okens(exp)
+        result = lexer.tokens(exp)
         writeFile(result)
-        lexer_v2.lista = []
-        #print(exp)
+        lexer.lista = []
+        print(exp)
+
     file.close()
 
 def writeFile(result):

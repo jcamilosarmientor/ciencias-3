@@ -1,0 +1,20 @@
+class program { 
+ program() { 
+ pickbeeper();  
+ move();    
+ turnleft();  
+ turnleft();  
+ turnleft();    
+ move();  
+ putbeeper();  
+ turnoff();
+ if (frontIsClear)
+ {
+     move ();
+ }
+if (frontIsClear)
+    {move ();
+	turn left ();}
+
+ } 
+}
