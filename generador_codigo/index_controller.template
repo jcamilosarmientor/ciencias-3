@@ -1,0 +1,22 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+{% for property in entity %}
+import './{{property.name|lower}}_controller.js';
+{% endfor %}
+
+class Index extends React.Component {
+  render() {
+      return (
+          <div className="index">
+            {{projectName|capitalize}}
+            para ciencias 3 :D :v
+            </div>
+      )
+  }
+}
+
+ReactDOM.render(
+  <Index />,
+  document.getElementById('root')
+);

@@ -1,0 +1,29 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+{% for property in entity.properties %}
+    {% if property is entity %}
+import './{{property.name}}_controller.js';
+    {% endif %}
+  {% endfor %}
+
+  {% for property in entity.properties %}
+    {% if property is not entity %}
+      {{property.type|reacttype}} {{property.name}};
+    {% endif %}
+  {% endfor %}
+
+class {{entity.name|capitalize}} extends React.Component {
+  render() {
+    return(
+      <div className="{{entity.name.lower()}}">
+      {{entity.name|capitalize}} :v
+    </div>
+    )
+  }
+}
+
+ReactDOM.render(
+  <{{entity.name|capitalize}} />,
+  document.getElementById('root')
+);
