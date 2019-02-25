@@ -36,6 +36,14 @@ def main(debug=False):
                 'time': 'var'
         }.get(s.name)
 
+    def htmltype(s):
+        return {
+                'float': 'number',
+                'integer': 'number',
+                'string': 'text',
+                'bool': 'checkbox',
+                'time': 'date'
+        }.get(s.name)
     def javatype(s):
         """
         Maps type names from PrimitiveType to Java.
@@ -62,6 +70,7 @@ def main(debug=False):
 
     jinja_env.filters['javatype'] = javatype
     jinja_env.filters['reacttype'] = reacttype
+    jinja_env.filters['htmltype'] = htmltype
 
     # Crea el index.html
     template = jinja_env.get_template('index.template')

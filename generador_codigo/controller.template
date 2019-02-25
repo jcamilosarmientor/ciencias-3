@@ -3,27 +3,36 @@ import ReactDOM from 'react-dom';
 import './index.css';
 {% for property in entity.properties %}
     {% if property is entity %}
-import './{{property.name}}_controller.js';
+import {{property.name|capitalize}} from './{{property.name}}_controller.js';
     {% endif %}
   {% endfor %}
 
   {% for property in entity.properties %}
     {% if property is not entity %}
-      {{property.type|reacttype}} {{property.name}};
+{{property.type|reacttype}} {{property.name}};
     {% endif %}
   {% endfor %}
 
 class {{entity.name|capitalize}} extends React.Component {
   render() {
     return(
-      <div className="{{entity.name.lower()}}">
-      {{entity.name|capitalize}} :v
-    </div>
+      <div className="{{entity.name.lower()}}" class="container">
+        <h3>{{entity.name|capitalize}} </h3>
+        <hr/>
+        <form>
+         {% for property in entity.properties %}
+          {% if property is not entity %}
+          <div class="form-group">
+            <label for="input{{property.name}}">{{property.name|capitalize}}</label>
+            <input type="{{property.type|htmltype}}" class="form-control" id="input{{property.name}}"/>
+           </div>
+          {% endif %}
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+      </div>
     )
   }
 }
 
-ReactDOM.render(
-  <{{entity.name|capitalize}} />,
-  document.getElementById('root')
-);
+export default {{entity.name|capitalize}};

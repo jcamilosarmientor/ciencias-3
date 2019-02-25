@@ -17,3 +17,9 @@ entity Telefono {
   indicador : string
   numero : string
 }
+
+entity Alien {
+  planeta: string
+  color: string
+  estrella: integer
+}

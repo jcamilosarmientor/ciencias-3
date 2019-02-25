@@ -5,19 +5,21 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 CYAN='\033[0;36m'
+BOLD='\033[1m'
 NC='\033[0m' # No Color
 
 function printOut () {
     if [ "$3" == "" ]
     then
-        echo "${2}${1}${NC}"
+        echo -e "${2}${1}${NC}"
     else 
-        echo "${2}${3}: ${1}${NC}"
+        echo -e "${2}${3}: ${1}${NC}"
     fi
 }
 
 function create_workspace () {
-    rm -rf workspace
+    rm -rf workspace/src
+    rm -rf workspace/public
     mkdir workspace
     mkdir workspace/src
     mkdir workspace/public
@@ -25,20 +27,24 @@ function create_workspace () {
 }
 
 function download_dependences () {
-    echo ' ~ Descargando dependencias...'
+    printOut ' ~ Copiando package.json' $BOLD
+    cp -v srcgen/package.json workspace
+    printOut ' ~ Descargando dependencias...' $BOLD
     cd workspace
     npm install
     npm --save install bootstrap
+    npm --save install jquery
     printOut 'Dependencias descargadas ' $GREEN 
     cd ..
 }
 
 # Inicio de ejecución
-echo ' ~ Generando código...'
+printOut ' ~ Generando código...' $BOLD
 python entity_codegen.py
 printOut 'Genración finalizada' $GREEN
 
-echo ' ~ Creando directorio de trabajo...'
+
+printOut ' ~ Creando directorio de trabajo...' $BOLD
 if [ -d workspace ] && [ -d workspace/node_modules ]
 then # workspace existe 
     printOut 'Ya existe el directorio workspace' $RED 'ERROR'
@@ -47,7 +53,6 @@ then # workspace existe
     if [ $answer = "S" ] || [ $answer = "s" ]
     then
         create_workspace
-        printOut 'Directorio de trabajo creado' $GREEN
     fi
 
     printOut '¿Volver a descargar las dependencias de este proyecto? S/N' $YELLOW 'WARNING'
@@ -62,14 +67,12 @@ else # workspace no existe
     download_dependences
 fi
 
-echo ' ~ Copiando ficheros javascript generados...'
+printOut ' ~ Copiando ficheros javascript generados...' $BOLD
 cp -v srcgen/*.js workspace/src
-echo ' ~ Copiando index.html...'
+printOut ' ~ Copiando index.html...' $BOLD
 cp -v srcgen/index.html workspace/public
-echo ' ~ Copiando estilos...'
+printOut ' ~ Copiando estilos...' $BOLD
 cp -v srcgen/*.css workspace/src
-echo ' ~ Copiando package.json'
-cp -v srcgen/package.json workspace
 
 #Iniciando servidor
 cd workspace
