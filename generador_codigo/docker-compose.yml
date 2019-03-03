@@ -27,7 +27,7 @@ services:
         container_name: "react_client"
         build: 
          context: node_build
-        command: npm start
+        command: sh -c 'npm stop; npm start'
         ports:
          - 3000:3000
         volumes:

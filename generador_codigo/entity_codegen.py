@@ -51,8 +51,17 @@ def main(debug=False):
                 'float': 'Number',
                 'integer': 'Number',
                 'string': 'String',
-                'bool': 'Bool',
+                'bool': 'Boolean',
                 'time': 'Time'
+        }.get(s.name)
+
+    def defaultvaluestype(s):
+        return {
+                'float': 0.0,
+                'integer': 0,
+                'string': "''",
+                'bool': 'false',
+                'time': "''"
         }.get(s.name)
 
     # Create output folder
@@ -73,6 +82,7 @@ def main(debug=False):
     jinja_env.filters['reacttype'] = reacttype
     jinja_env.filters['htmltype'] = htmltype
     jinja_env.filters['mongotype'] = mongotype
+    jinja_env.filters['defaultvaluestype'] = defaultvaluestype
 
     # Crea el index.html
     template = jinja_env.get_template('index.template')

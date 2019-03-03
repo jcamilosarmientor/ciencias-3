@@ -36,6 +36,8 @@ function download_dependences () {
     npm install
     npm install bootstrap --save
     npm install react-router-dom --save
+    npm install axios --save
+    npm install sweetalert2 --save
     cd ..
 }
 

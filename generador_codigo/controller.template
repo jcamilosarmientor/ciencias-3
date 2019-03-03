@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 import './index.css';
 {% for property in entity.properties %}
     {% if property is entity %}
@@ -14,21 +16,76 @@ import {{property.name|capitalize}} from './{{property.name}}_controller.js';
   {% endfor %}
 
 class {{entity.name|capitalize}} extends React.Component {
+   constructor(props) {
+      super(props);
+  {% for property in entity.properties %}
+      this.onChange{{property.name|capitalize}} = this.onChange{{property.name|capitalize}}.bind(this);
+  {% endfor %}
+      this.onSubmit = this.onSubmit.bind(this);
+
+      this.state = {
+        {% for property in entity.properties %}
+        {% if property is entity %}
+        {{property.name}}: null,
+        {% else %}
+        {{property.name}}: {{property.type|defaultvaluestype}},
+        {% endif %}
+        {% endfor %}
+      }
+  }
+
+  {% for property in entity.properties %}
+  onChange{{property.name|capitalize}}(e) {
+    this.setState({
+      {{property.name|lower}}: e.target.value
+    });
+  }
+  {% endfor %}
+
+  onSubmit(e) {
+    e.preventDefault();
+    console.log('onSubmit function');
+    const obj = {
+      {% for property in entity.properties %}
+      {{property.name|lower}}: this.state.{{property.name|lower}},
+      {% endfor %}
+    };
+    axios.post('http://localhost:4000/{{entity.name|lower}}/add', obj)
+        .then(res => console.log(res.data));
+    Swal.fire(
+      'Completo',
+      'Registro completo',
+      'success'
+    )
+    this.setState({
+      {% for property in entity.properties %}
+        {% if property is entity %}
+        {{property.name}}: null,
+        {% else %}
+        {{property.name}}: {{property.type|defaultvaluestype}},
+        {% endif %}
+        {% endfor %}
+    });
+  }
+
   render() {
     return(
-      <div className="{{entity.name.lower()}}" class="container">
+      <div className="{{entity.name.lower()}}" className="container">
         <h3>{{entity.name|capitalize}} </h3>
         <hr/>
-        <form>
+        <form onSubmit={this.onSubmit}>
          {% for property in entity.properties %}
           {% if property is not entity %}
-          <div class="form-group">
-            <label for="input{{property.name}}">{{property.name|capitalize}}</label>
-            <input type="{{property.type|htmltype}}" class="form-control" id="input{{property.name}}"/>
+          <div className="form-group">
+            <label htmlFor="input{{property.name}}">{{property.name|capitalize}}</label>
+            <input type="{{property.type|htmltype}}" 
+              value={ this.state.{{property.name}} }
+              onChange={ this.onChange{{property.name|capitalize}} }
+              className="form-control" id="input{{property.name}}"/>
            </div>
           {% endif %}
         {% endfor %}
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="submit" className="btn btn-primary">Guardar</button>
         </form>
       </div>
     )

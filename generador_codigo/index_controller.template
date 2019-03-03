@@ -13,19 +13,19 @@ class Index extends React.Component {
           <div className="index">
             <Router>
               <div>
-                <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+                <nav className="navbar navbar-expand-lg navbar-light bg-primary">
 
-                  <span class="navbar-brand mb-0 h1"><a class="navbar-brand text-white">
-                    <Link to={'/'} className="navbar-brand text-white">{{projectName|capitalize}}</Link></a>
+                  <span className="navbar-brand mb-0 h1"><span className="navbar-brand text-white">
+                    <Link to={'/'} className="navbar-brand text-white">{{projectName|capitalize}}</Link></span>
                   </span>
 
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                      <ul class="navbar-nav">
+                    <div className="collapse navbar-collapse" id="navbarNav">
+                      <ul className="navbar-nav">
                       {% for property in entity %}
-                        <li class="nav-item">
-                          <a class="nav-link text-white">
+                        <li className="nav-item">
+                          <span className="nav-link text-white">
                             <Link to={'/{{property.name|lower}}'} className="nav-link">{{property.name|capitalize}}</Link>
-                          </a>
+                          </span>
                         </li>
                       {% endfor %}
                       </ul>
@@ -39,7 +39,7 @@ class Index extends React.Component {
               </div>
             </Router>
 
-          <div class="container"> 
+          <div className="container"> 
             <br />
           </div>
 
