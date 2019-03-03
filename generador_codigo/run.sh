@@ -20,9 +20,11 @@ function printOut () {
 function create_workspace () {
     rm -rf workspace/src
     rm -rf workspace/public
-    mkdir workspace
+    cp -v srcgen/package.json workspace
     mkdir workspace/src
     mkdir workspace/public
+    mkdir mongo_data
+    mkdir workspace/api
     printOut 'Directorio de trabajo creado' $GREEN   
 }
 
@@ -32,9 +34,8 @@ function download_dependences () {
     printOut ' ~ Descargando dependencias...' $BOLD
     cd workspace
     npm install
-    npm --save install bootstrap
-    npm --save install jquery
-    printOut 'Dependencias descargadas ' $GREEN 
+    npm install bootstrap --save
+    npm install react-router-dom --save
     cd ..
 }
 
@@ -63,17 +64,24 @@ then # workspace existe
     fi
 
 else # workspace no existe
+    mkdir workspace
     create_workspace
     download_dependences
 fi
 
 printOut ' ~ Copiando ficheros javascript generados...' $BOLD
 cp -v srcgen/*.js workspace/src
+cp -v srcgen/api/*.js workspace/api
 printOut ' ~ Copiando index.html...' $BOLD
 cp -v srcgen/index.html workspace/public
 printOut ' ~ Copiando estilos...' $BOLD
 cp -v srcgen/*.css workspace/src
 
-#Iniciando servidor
-cd workspace
-npm start 
+# Creando contenedores
+printOut ' ~ Iniciando compose...' $BOLD
+docker-compose build
+
+# Levantando contenedores
+docker-compose up -d
+
+

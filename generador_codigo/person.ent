@@ -22,4 +22,11 @@ entity Alien {
   planeta: string
   color: string
   estrella: integer
+  planeta: Planeta
+}
+
+entity Planeta {
+  color: string
+  lunas: bool 
+  estrellas: bool
 }

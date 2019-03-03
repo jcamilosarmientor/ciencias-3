@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import './index.css';
 {% for property in entity %}
 import {{property.name|capitalize}} from './{{property.name|lower}}_controller.js';
@@ -10,20 +11,33 @@ class Index extends React.Component {
   render() {
       return (
           <div className="index">
+            <Router>
+              <div>
+                <nav class="navbar navbar-expand-lg navbar-light bg-primary">
 
-            <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-              <span class="navbar-brand mb-0 h1"><a class="navbar-brand text-white" href="#">{{projectName|capitalize}}</a></span>
+                  <span class="navbar-brand mb-0 h1"><a class="navbar-brand text-white">
+                    <Link to={'/'} className="navbar-brand text-white">{{projectName|capitalize}}</Link></a>
+                  </span>
 
-                <div class="collapse navbar-collapse" id="navbarNav">
-                  <ul class="navbar-nav">
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                      <ul class="navbar-nav">
+                      {% for property in entity %}
+                        <li class="nav-item">
+                          <a class="nav-link text-white">
+                            <Link to={'/{{property.name|lower}}'} className="nav-link">{{property.name|capitalize}}</Link>
+                          </a>
+                        </li>
+                      {% endfor %}
+                      </ul>
+                    </div>
+                </nav>
+                <Switch>
                   {% for property in entity %}
-                    <li class="nav-item">
-                      <a class="nav-link text-white" href="#">{{property.name|capitalize}}</a>
-                    </li>
+                    <Route exact path='/{{property.name|lower}}' component={ {{property.name|capitalize}} } />
                   {% endfor %}
-                  </ul>
-                </div>
-            </nav>
+                </Switch>
+              </div>
+            </Router>
 
           <div class="container"> 
             <br />

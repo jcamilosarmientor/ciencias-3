@@ -1,3 +1,5 @@
 .DS_Store
 generador_codigo/srcgen
 generador_codigo/workspace
+generador_codigo/mongo_data
+settings.json

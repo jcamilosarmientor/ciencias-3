@@ -1,0 +1,19 @@
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+
+let {{entity.name|capitalize}} = new Schema({
+    
+{% for property in entity.properties %}
+    {% if property is not entity %}
+    {{property.name}}: {
+        type: {{property.type|mongotype}}
+    },
+    {% endif %}
+{% endfor %}
+}
+,{
+    collection: '{{entity.name|lower}}'
+});
+
+module.exports = mongoose.model('{{entity.name|capitalize}}', {{entity.name|capitalize}});

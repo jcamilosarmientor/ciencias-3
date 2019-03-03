@@ -1,0 +1,67 @@
+const express = require('express');
+const {{entity.name|lower}}Routes = express.Router();
+
+// Require {{entity.name|capitalize}} model in our routes module
+let {{entity.name|capitalize}} = require('./{{entity.name|lower}}.model');
+
+// Defined store route
+{{entity.name|lower}}Routes.route('/add').post(function (req, res) {
+  let {{entity.name|lower}} = new {{entity.name|capitalize}}(req.body);
+  {{entity.name|lower}}.save()
+    .then({{entity.name|lower}} => {
+      res.status(200).json({'{{entity.name|lower}}': '{{entity.name|lower}} in added successfully'});
+    })
+    .catch(err => {
+    res.status(400).send("unable to save to database");
+    });
+});
+
+// Defined get data(index or listing) route
+{{entity.name|lower}}Routes.route('/').get(function (req, res) {
+    {{entity.name|capitalize}}.find(function(err, businesses){
+    if(err){
+      console.log(err);
+    }
+    else {
+      res.json(businesses);
+    }
+  });
+});
+
+// Defined edit route
+{{entity.name|lower}}Routes.route('/edit/:id').get(function (req, res) {
+  let id = req.params.id;
+  {{entity.name|capitalize}}.findById(id, function (err, {{entity.name|lower}}){
+      res.json({{entity.name|lower}});
+  });
+});
+
+//  Defined update route
+{{entity.name|lower}}Routes.route('/update/:id').post(function (req, res) {
+    {{entity.name|capitalize}}.findById(req.params.id, function(err, {{entity.name|lower}}) {
+    if (!{{entity.name|lower}})
+      res.status(404).send("data is not found");
+    else {
+        {{entity.name|lower}}.person_name = req.body.person_name;
+        {{entity.name|lower}}.business_name = req.body.business_name;
+        {{entity.name|lower}}.business_gst_number = req.body.business_gst_number;
+
+        {{entity.name|lower}}.save().then({{entity.name|lower}} => {
+          res.json('Update complete');
+      })
+      .catch(err => {
+            res.status(400).send("unable to update the database");
+      });
+    }
+  });
+});
+
+// Defined delete | remove | destroy route
+{{entity.name|lower}}Routes.route('/delete/:id').get(function (req, res) {
+    {{entity.name|capitalize}}.findByIdAndRemove({_id: req.params.id}, function(err, {{entity.name|lower}}){
+        if(err) res.json(err);
+        else res.json('Successfully removed');
+    });
+});
+
+module.exports = {{entity.name|lower}}Routes;

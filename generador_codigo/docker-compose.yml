@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+    react_api:
+        container_name: "react_api"
+        build: 
+         context: node_build
+        ports:
+         - 4000:4000
+        volumes:
+         - ./workspace/api:/app
+        command: sh -c 'npm init -y; npm install express body-parser cors mongoose --save; npx nodemon'
+        depends_on:
+         - mongodb 
+        links:
+         - mongodb
+
+    mongodb:
+        container_name: "mongodb"
+        image: mongo:latest
+        volumes:
+         - ./mongo_data:/data/db
+        ports:
+         - 27017:27017
+
+    react_client:
+        container_name: "react_client"
+        build: 
+         context: node_build
+        command: npm start
+        ports:
+         - 3000:3000
+        volumes:
+         - ./workspace:/app
+        links:
+         - react_api
+        depends_on:
+         - react_api
+
+         
