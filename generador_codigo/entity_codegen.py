@@ -52,7 +52,7 @@ def main(debug=False):
                 'integer': 'Number',
                 'string': 'String',
                 'bool': 'Boolean',
-                'time': 'Time'
+                'time': 'Date'
         }.get(s.name)
 
     def defaultvaluestype(s):
